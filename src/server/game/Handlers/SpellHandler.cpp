@@ -16,6 +16,7 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "TransmogDisplayVendorConf.h"
 #include "WorldSession.h"
 #include "Common.h"
 #include "Config.h"
@@ -694,6 +695,8 @@ void WorldSession::HandleMirrorImageDataRequest(WorldPacket& recvData)
             {
                 if (auto const * itemTemplate = sObjectMgr->GetItemTemplate(item->transmog))
                     data << uint32(itemTemplate->DisplayInfoID);
+                else if (uint32 entry = TransmogDisplayVendorMgr::GetFakeEntry(item))
+                    data << uint32(sObjectMgr->GetItemTemplate(entry)->DisplayInfoID);
                 else
                     data << uint32(item->GetTemplate()->DisplayInfoID);
             }

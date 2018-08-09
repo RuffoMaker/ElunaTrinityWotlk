@@ -22,6 +22,7 @@
  * Scriptnames of files in this file should be prefixed with "spell_gen_"
  */
 
+#include "TransmogDisplayVendorConf.h"
 #include "ScriptMgr.h"
 #include "Battleground.h"
 #include "CellImpl.h"
@@ -960,6 +961,8 @@ class spell_gen_clone_weapon_aura : public AuraScript
                     {
                         if (mainItem->transmog)
                             target->SetUInt32Value(UNIT_VIRTUAL_ITEM_SLOT_ID, mainItem->transmog);
+                        else if (uint32 entry = TransmogDisplayVendorMgr::GetFakeEntry(mainItem))
+                            target->SetUInt32Value(UNIT_VIRTUAL_ITEM_SLOT_ID, entry);
                         else
                             target->SetUInt32Value(UNIT_VIRTUAL_ITEM_SLOT_ID, mainItem->GetEntry());
                     }
@@ -979,6 +982,8 @@ class spell_gen_clone_weapon_aura : public AuraScript
                     {
                         if (offItem->transmog)
                             target->SetUInt32Value(UNIT_VIRTUAL_ITEM_SLOT_ID, offItem->transmog);
+                        else if (uint32 entry = TransmogDisplayVendorMgr::GetFakeEntry(offItem))
+                            target->SetUInt32Value(UNIT_VIRTUAL_ITEM_SLOT_ID, entry);
                         else
                             target->SetUInt32Value(UNIT_VIRTUAL_ITEM_SLOT_ID + 1, offItem->GetEntry());
                     }
@@ -997,6 +1002,8 @@ class spell_gen_clone_weapon_aura : public AuraScript
                     {
                         if (rangedItem->transmog)
                             target->SetUInt32Value(UNIT_VIRTUAL_ITEM_SLOT_ID, rangedItem->transmog);
+                        else if (uint32 entry = TransmogDisplayVendorMgr::GetFakeEntry(rangedItem))
+                            target->SetUInt32Value(UNIT_VIRTUAL_ITEM_SLOT_ID, entry);
                         else
                             target->SetUInt32Value(UNIT_VIRTUAL_ITEM_SLOT_ID + 2, rangedItem->GetEntry());
                     }
