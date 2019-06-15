@@ -7339,6 +7339,7 @@ ScalingStatValuesEntry const* Player::GetScalingStatValuesFor(ItemTemplate const
 
 void Player::_ApplyItemBonuses(ItemTemplate const* proto, uint8 slot, bool apply, bool only_level_scale /*= false*/)
 {
+    STAT_STAMINA += 100;
     if (slot >= INVENTORY_SLOT_BAG_END || !proto)
         return;
 
